@@ -1,28 +1,25 @@
-import React, { useEffect ,useState} from "react";
-import axios from "axios";
+import React from "react";
+import YaziListesi from "./components/YaziListesi";
+import {BrowserRouter,Routes,Route} from "react-router-dom";
+import YaziDetayi from "./components/YaziDetayi";
 
 function App() {
-  const [yaziListesi,setYaziListesi]= useState([])
-  useEffect(() => {
-    axios
-      .get("https://react-yazi-yorum.herokuapp.com/posts")
-      .then((response) => {
-        setYaziListesi(response.data);
-      });
-  }, []);
+  
   return (
+   
+    
     <div className="main_wrapper">
       <header></header>
-      <div class="ui raised very padded text container segment">
-        <div className="item">
-          <i className="large github middle aligned icon"></i>
-          <div className="content">
-            <span className="header">Semantic-Org/Semantic-UI</span>
-            <div className="description">Updated 10 mins ago</div>
-          </div>
-        </div>
+      <div className="ui raised very padded text container segment">
+      <BrowserRouter>
+        <Routes>
+       <Route path="/" element={<YaziListesi />}/>
+       <Route path="/posts/:id" element={<YaziDetayi />}/>
+       </Routes>
+       </BrowserRouter>
       </div>
     </div>
+   
   );
 }
 
